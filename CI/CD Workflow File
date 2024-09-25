@@ -1,0 +1,32 @@
+name: Customer Churn CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run unit tests
+      run: |
+        pytest tests/
+
+    - name: Deploy to AWS Lambda
+      if: success()
+      run: |
+        aws lambda update-function-code --function-name customer-churn-prediction --zip-file fileb://lambda.zip
