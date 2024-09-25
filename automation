@@ -1,0 +1,8 @@
+Test: data_preprocessing.py
+- Passed: Clean missing values
+- Passed: One-hot encoding of categorical features
+- Passed: Feature scaling
+Test: model_training.py
+- Passed: Model initialization
+- Passed: Hyperparameter tuning (GridSearchCV)
+- Passed: Model evaluation (Accuracy: 89.6%)
